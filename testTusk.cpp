@@ -1,10 +1,9 @@
-﻿// testTusk.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
-#include <iostream>
+﻿#include <iostream>
+#include <ctime>
 
 int main()
 {
+    //srand(time(0));
     std::cout << "Hello World!\n";
 }
 

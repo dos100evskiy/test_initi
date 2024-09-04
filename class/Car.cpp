@@ -1,9 +1,9 @@
 #include "Car.h"
 
 Car::Car() {
-	direction = FORWARD;
+	_direction = FORWARD;
 }
 
-Car::Car(Direction inDirecthion) {
-	direction = inDirecthion;
+Car::Car(Direction inDirection) {
+	_direction = inDirection;
 }

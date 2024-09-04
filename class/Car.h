@@ -11,13 +11,13 @@ public:
 	Car();
 	Car(Direction inDirection);
 
-	Direction getDir() { return direction; }
+	Direction getDir() { return _direction; }
 
-	bool setDir(Direction inDirection) { direction = inDirection; }
+	bool setDir(Direction inDirection) { _direction = inDirection; }
 
 private:
 
-	Direction direction;
+	Direction _direction;
 
 	
 };
