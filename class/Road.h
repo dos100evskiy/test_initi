@@ -1,16 +1,6 @@
 #pragma once
 #include <queue>
 #include "msg.h"
-enum SIGN_CAR {
-	C_RED,
-	C_YELLOW,
-	C_GREEN
-};
-
-enum SIGN_HUMAN {
-	H_RED,
-	H_GREEN
-};
 
 class Road
 {

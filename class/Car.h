@@ -1,9 +1,5 @@
 #pragma once
-enum Direction
-{
-	FORWARD,
-	RIGHT
-};
+#include "ENUMS.h"
 
 class Car
 {

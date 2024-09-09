@@ -1,5 +1,6 @@
 #pragma once
 #include "Car.h"
+
 class msg
 {
 private:
@@ -7,9 +8,9 @@ private:
 	int _curNumUpperHuman;
 	int _curNumLowerHuman;
 	int _curNumCar;
-	int _curUpperHumanSign;
-	int _curLowerHumanSign;
-	int _curCarSign;
+	SIGN_HUMAN _curUpperHumanSign;
+	SIGN_HUMAN _curLowerHumanSign;
+	SIGN_CAR _curCarSign;
 	Car* _curCar;
 
 	bool _needSwapUpperHumanSign;
@@ -17,19 +18,20 @@ private:
 	bool _needSwapCarSign;
 
 public:
-	msg(int idRoad, int curNumUpperHuman, int curNumLowerHuman, int curNumCar, int curUpperHumanSign, int curLowerHumanSign, 
-		int curCarSign, Car* curCar);
-	msg(bool needSwapUpperHumanSign, bool needSwapLowerHumanSign, bool needSwapCarSign);
+	msg();
+	msg(int idRoad, int curNumUpperHuman, int curNumLowerHuman, int curNumCar, SIGN_HUMAN curUpperHumanSign, SIGN_HUMAN curLowerHumanSign,
+		SIGN_CAR curCarSign, Car* curCar);
+	void controlBoxUpdate(bool needSwapUpperHumanSign, bool needSwapLowerHumanSign, bool needSwapCarSign);
 
 	~msg() = default;
 
 	int getId() { return _idRoad; }
-	int getCuNumrUpperHuman() { return _curNumUpperHuman; }
+	int getCurNumUpperHuman() { return _curNumUpperHuman; }
 	int getCurNumLowerHuman() { return _curNumLowerHuman; }
-	int getNumCur() { return _curNumCar; }
-	int getCurUpperHumanSign() { return _curUpperHumanSign; }
-	int getCurLowerHumanSign() { return _curLowerHumanSign; }
-	int getCurCarSign() { return _curCarSign; };
+	int getNumCurCar() { return _curNumCar; }
+	SIGN_HUMAN getCurUpperHumanSign() { return _curUpperHumanSign; }
+	SIGN_HUMAN getCurLowerHumanSign() { return _curLowerHumanSign; }
+	SIGN_CAR getCurCarSign() { return _curCarSign; };
 	Car* getCar() { return _curCar; }
 
 	bool getNeedUpperSwap() { return _needSwapUpperHumanSign; }

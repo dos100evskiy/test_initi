@@ -116,5 +116,4 @@ msg* Road::createMSG() {
 	}
 	else
 		return false;
-
 }
