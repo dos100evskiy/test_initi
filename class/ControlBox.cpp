@@ -3,14 +3,13 @@
 void ControlBox::acceptMSG(msg inMSG) {
 	auto iter = std::find_if(_msgs.begin(), _msgs.end(), [&inMSG](msg val) { return (val.getId() == inMSG.getId()); });
 	if (iter != _msgs.end()) {
-		delete &iter;
 		_msgs.erase(iter);
 	}
 
 	_msgs.push_back(inMSG);
 }
 
-msg ControlBox::sendMSG(int id) {
+msg ControlBox::createMSG(int id) {
 	auto iter = std::find_if(_msgs.begin(), _msgs.end(), [id](msg val) {return (val.getId() == id); });
 	if (iter != _msgs.end())
 		return *iter;
@@ -137,7 +136,7 @@ std::pair<int, std::pair<int, int>> ControlBox::_culcMaxSum() {
 	for (auto var : _msgs) {
 		//for vertical
 		if (var.getId() == 1) {
-			if (var.getCar()->getDir() == RIGHT && (_koefs[0][1] + _koefs[2][2] < _koefs[1][0])) {
+			if (var.getCar() && var.getCar()->getDir() == RIGHT && (_koefs[0][1] + _koefs[2][2] < _koefs[1][0])) {
 					vertical += _koefs[1][0];
 					variantVertical.second.first = 1;
 			}
@@ -147,7 +146,7 @@ std::pair<int, std::pair<int, int>> ControlBox::_culcMaxSum() {
 			}
 		}
 		else if (var.getId() == 3) {
-			if (var.getCar()->getDir() == RIGHT && (_koefs[0][2] + _koefs[2][1] < _koefs[3][0])) {
+			if (var.getCar() && var.getCar()->getDir() == RIGHT && (_koefs[0][2] + _koefs[2][1] < _koefs[3][0])) {
 				vertical += _koefs[3][0];
 				variantVertical.second.second = 1;
 			}
@@ -157,8 +156,8 @@ std::pair<int, std::pair<int, int>> ControlBox::_culcMaxSum() {
 			}
 		}
 		// for horizontal
-		if (var.getId() == 0) {
-			if (var.getCar()->getDir() == RIGHT && (_koefs[1][2] + _koefs[3][1] < _koefs[0][0])) {
+		else if (var.getId() == 0) {
+			if (var.getCar() && var.getCar()->getDir() == RIGHT && (_koefs[1][2] + _koefs[3][1] < _koefs[0][0])) {
 				horizontal += _koefs[0][0];
 				variantHorizontal.second.first = 1;
 			}
@@ -168,7 +167,7 @@ std::pair<int, std::pair<int, int>> ControlBox::_culcMaxSum() {
 			}
 		}
 		else if (var.getId() == 2) {
-			if (var.getCar()->getDir() == RIGHT && (_koefs[1][1] + _koefs[3][2] < _koefs[2][0])) {
+			if (var.getCar() && var.getCar()->getDir() == RIGHT && (_koefs[1][1] + _koefs[3][2] < _koefs[2][0])) {
 				horizontal += _koefs[2][0];
 				variantHorizontal.second.second = 1;
 			}

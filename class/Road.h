@@ -6,6 +6,7 @@ class Road
 {
 public:
 	Road();
+	Road(int id);
 	Road(int id, int maxHuman, int maxCar, int percantRotation, int newHumanChance = 40, int newCarChance = 30);
 	Road(int id, int numOfUpperHuman, int NumOfLowerHuman,int numOfCars, int percantRotation, int newHumanChance = 40, int newCarChance = 30);
 	bool update();
@@ -20,12 +21,15 @@ public:
 	void needSwapCarSign() { _carNeedSwap = true; }
 	void needSwapLowerHumanSign() { _humanLowerNeedSwap = true; }
 	void needSwapUpperHumanSin() { _humanUpperNeedSwap = true; }
-	msg* createMSG();
-	[[nodiscard]] bool acceptMSG(msg* inMSG);
+
+	SIGN_CAR getSignCar() { return _curSignCar; }
+	SIGN_HUMAN getLowerSign() { return _curSignLowerHuman; } 
+	SIGN_HUMAN getUpperSign() { return _curSignUpperHuman; }
+	msg createMSG();
+	[[nodiscard]] bool acceptMSG(msg inMSG);
 
 private:
 	int _id;
-
 	void _constructor();
 	std::queue<Car*> _cars;
 	int _upperNumOfHuman;

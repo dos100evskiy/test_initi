@@ -33,7 +33,7 @@ public:
 	ControlBox();
 
 	void acceptMSG(msg msg);
-	msg sendMSG(int id);
+	msg createMSG(int id);
 	
 	[[nodiscard]] bool culculate();
 

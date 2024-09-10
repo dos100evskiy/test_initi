@@ -1,6 +1,7 @@
 #include "Road.h"
 
 Road::Road() {
+	
 	_upperNumOfHuman = rand() % 5;
 	_lowerNumOfHuman = rand() % 5;
 	int j = rand() % 5;
@@ -12,6 +13,22 @@ Road::Road() {
 	_percantRotation = 35;
 
 	_id = -1;
+	_constructor();
+}
+
+Road::Road(int id) {
+
+	_upperNumOfHuman = rand() % 5;
+	_lowerNumOfHuman = rand() % 5;
+	int j = rand() % 5;
+	for (int i = 0; i < j; ++i)
+		_cars.push(new Car(rand() % 10 < 6 ? RIGHT : FORWARD));
+
+	_newHumanChance = 40;
+	_newCarChance = 30;
+	_percantRotation = 35;
+
+	_id = id;
 	_constructor();
 }
 
@@ -91,26 +108,26 @@ void Road::_swapCarSign() {
 }
 
 void Road::_swapUpperHumanSign() {
-	_curSignUpperHuman == H_GREEN ? H_RED : H_GREEN;
+	_curSignUpperHuman == H_GREEN ? _curSignUpperHuman = H_RED : _curSignUpperHuman = H_GREEN;
 }
 
 void Road::_swapLowerHumanSign() {
-	_curSignLowerHuman == H_GREEN ? H_RED : H_GREEN;
+	_curSignLowerHuman == H_GREEN ? _curSignLowerHuman = H_RED : _curSignLowerHuman = H_GREEN;
 }
 
-msg* Road::createMSG() {
-	msg* temp = new msg(_id, _upperNumOfHuman, _lowerNumOfHuman, getNumOfCars(), _curSignUpperHuman,
+msg Road::createMSG() {
+	msg temp(_id, _upperNumOfHuman, _lowerNumOfHuman, getNumOfCars(), _curSignUpperHuman,
 		_curSignLowerHuman, _curSignCar, getFirstCar());
 
 	return temp;
 }
 
-[[nodiscard]] bool Road::acceptMSG(msg* msg) {
+[[nodiscard]] bool Road::acceptMSG(msg msg) {
 	
-	if (_id == msg->getId()) {
-		_carNeedSwap = msg->getNeedCarSwap();
-		_humanLowerNeedSwap = msg->getNeedLowerSwap();
-		_humanUpperNeedSwap = msg->getNeedUpperSwap();
+	if (_id == msg.getId()) {
+		if(_curSignCar != C_YELLOW) _carNeedSwap = msg.getNeedCarSwap();
+		_humanLowerNeedSwap = msg.getNeedLowerSwap();
+		_humanUpperNeedSwap = msg.getNeedUpperSwap();
 
 		return true;
 	}
